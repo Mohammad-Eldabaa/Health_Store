@@ -9,7 +9,7 @@ export default function StackContainer() {
   return (
     <Navigator>
       <Screen
-        name="Home"
+        name="homePage"
         component={HomeScreen}
         options={{
           headerShown: false,

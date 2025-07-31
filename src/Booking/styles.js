@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     direction: "rtl",
     flex: 1,
-    backgroundColor: "#E0F7FA",
+    backgroundColor: "#fff",
   },
   scrollView: {
     flex: 1,
@@ -31,16 +31,16 @@ export const styles = StyleSheet.create({
     color: "#B2EBF2",
   },
   formContainer: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#fff",
     marginHorizontal: 16,
     marginVertical: 20,
     borderRadius: 16,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    // padding: 20,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
+    // elevation: 3,
   },
   formHeaderContainer: {
     backgroundColor: "#0097A7",
@@ -63,9 +63,10 @@ export const styles = StyleSheet.create({
   },
   formContent: {
     gap: 20,
+    marginTop: 16,
   },
   inputContainer: {
-    marginBottom: 16,
+    marginBottom: 12,
   },
   labelContainer: {
     flexDirection: "row",
@@ -76,7 +77,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "500",
     color: "#374151",
-    marginLeft: 8,
+    marginRight: 8,
   },
   textInput: {
     borderWidth: 2,
@@ -159,12 +160,12 @@ export const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 20,
     borderRadius: 16,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    // padding: 20,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
+    // elevation: 3,
   },
   infoTitle: {
     fontSize: 18,
@@ -180,8 +181,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "#F9FAFB",
     padding: 16,
     borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: "#0097A7",
+    borderRightWidth: 4,
+    borderRightColor: "#0097A7",
   },
   infoLabel: {
     fontSize: 14,

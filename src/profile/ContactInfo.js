@@ -29,7 +29,7 @@ export const ContactInfo = () => {
       <View style={styles.contactItem}>
         <Ionicons name="language" size={20} color="#0097A7" />
         <Text style={styles.contactText}>
-          {doctorProfile.languages.join("، ")}
+          {doctorProfile.languages?.join("، ")}
         </Text>
       </View>
     </View>

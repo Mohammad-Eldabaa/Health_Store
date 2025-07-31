@@ -7,6 +7,7 @@ export const useProfileStore = create(
   persist(
     (set) => ({
       doctorProfile: {},
+      setDoctorProfile: (profile) => set({ doctorProfile: profile }),
       getDoctorProfile: async () => {
         const { data, error } = await supabase
           .from("DoctorProfile")

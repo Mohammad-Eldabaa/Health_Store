@@ -3,10 +3,20 @@ import { Image, Text, View } from "react-native";
 import { StyleSheet, Dimensions } from "react-native";
 import { useProfileStore } from "../store/profile";
 import { useEffect, useState } from "react";
+import { setupRealtimeProfile } from "../store/realtime";
+import { supabase } from "../store/supabase";
 
 export const ProfileHeader = () => {
-  const { doctorProfile, getDoctorImage } = useProfileStore();
+  const { doctorProfile, getDoctorImage, setDoctorProfile } = useProfileStore();
   const [doctorImage, setDoctorImage] = useState(null);
+
+  useEffect(() => {
+    console.log("inside use effect");
+    const channel = setupRealtimeProfile(setDoctorProfile);
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   const fetchDoctorImage = async () => {
     if (doctorProfile.image) {
@@ -43,14 +53,14 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#c9eef3ff",
     paddingTop: 40,
     paddingBottom: 24,
     paddingHorizontal: 20,
     alignItems: "center",
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    marginBottom: 16,
+    borderRadius: 24,
+    // borderBottomRightRadius: 24,
+    margin: 16,
   },
 
   imageContainer: {
@@ -97,7 +107,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 6,
     letterSpacing: 0.5,
-    fontFamily: "System", // Will use system Arabic font
+    fontFamily: "System",
   },
 
   specialty: {

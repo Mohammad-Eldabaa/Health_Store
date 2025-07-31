@@ -2,9 +2,10 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
-import StackContainer from "./stackNavigation";
+// import StackContainer from "./stackNavigation";
 import Profile from "../profile";
 import Booking from "../Booking";
+import Home from "../home";
 
 export default function BottomNavigation() {
   const _renderIcon = (routeName, selectedTab) => {
@@ -66,7 +67,7 @@ export default function BottomNavigation() {
       <CurvedBottomBar.Screen
         name="Home"
         position="CENTER"
-        component={StackContainer}
+        component={Home}
         options={{ headerShown: false }}
       />
       <CurvedBottomBar.Screen

@@ -1,5 +1,3 @@
-// LoginScreen.js
-
 import React, { useState } from "react";
 import {
   View,
@@ -11,22 +9,22 @@ import {
   ScrollView,
   I18nManager,
 } from "react-native";
-
-import LoginSchema from "../validation/LoginSchema"; // التحقق من البيانات
-import * as Yup from "yup"; // مهم علشان نتحكم في الأخطاء
+import LoginSchema from "../validation/LoginSchema";
+import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
+import useAuthStore from "../../store/login";
 
-// تفعيل RTL
 I18nManager.forceRTL(true);
 
 const LoginScreen = () => {
-  const { navigate } = useNavigation();
+  const { navigate, reset } = useNavigation();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const login = useAuthStore((state) => state.login);
 
   const handleChange = (key, value) => {
     setForm({ ...form, [key]: value });
@@ -36,9 +34,8 @@ const LoginScreen = () => {
     try {
       await LoginSchema.validate(form, { abortEarly: false });
       setErrors({});
-      console.log("✅ Login Data:", form);
-      // هنا تضيف اللوجيك بتاعك
-      // navigation.navigate("Home");
+      setLoading(true);
+      await login(form, navigate, reset);
     } catch (err) {
       const validationErrors = {};
       if (err.inner) {
@@ -47,12 +44,13 @@ const LoginScreen = () => {
         });
       }
       setErrors(validationErrors);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* صورة الدكتور */}
       <Image
         source={{
           uri: "https://img.pikbest.com/png-images/20241019/doctor-logo-vector-icon-illustration_10974092.png!w700wp",
@@ -86,8 +84,14 @@ const LoginScreen = () => {
         <Text style={styles.forgotPassword}>هل نسيت كلمة السر؟</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>تسجيل الدخول</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleSubmit}
+        disabled={loading}
+      >
+        <Text style={styles.buttonText}>
+          {loading ? "جاري التحميل..." : "تسجيل الدخول"}
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity

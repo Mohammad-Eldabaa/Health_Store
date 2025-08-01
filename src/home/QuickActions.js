@@ -48,13 +48,13 @@ const quickActions = [
     title: "الاسعافات الأولية",
     icon: "medical-services",
     color: "#8ae6f0ff",
-    action: "",
+    action: "FirstAid",
   },
   {
     title: "المقالات الطبية",
     icon: "book",
     color: "#F44336",
-    action: "",
+    action: "MedicalArticlesPage",
   },
 ];
 //  () => Linking.openURL(`tel:01012345678`)

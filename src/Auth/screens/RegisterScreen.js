@@ -10,10 +10,12 @@ import {
 } from "react-native";
 import registerSchema from "../validation/registerSchema";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import useAuthStore from "../../store/login";
 
 I18nManager.forceRTL(true);
 
 const RegisterScreen = ({ navigation }) => {
+  const { register } = useAuthStore();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -33,8 +35,7 @@ const RegisterScreen = ({ navigation }) => {
     try {
       await registerSchema.validate(form, { abortEarly: false });
       setErrors({});
-      console.log("Register Data:", form);
-      // API request or navigation logic here
+      register(form, navigation);
     } catch (err) {
       const validationErrors = {};
       err.inner.forEach((e) => {

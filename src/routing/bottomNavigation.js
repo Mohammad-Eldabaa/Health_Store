@@ -43,6 +43,7 @@ export default function BottomNavigation() {
 
   return (
     <CurvedBottomBar.Navigator
+      headerShown={false}
       type="DOWN"
       style={styles.bottomBar}
       shadowStyle={styles.shawdow}

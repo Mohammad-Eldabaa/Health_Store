@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
-// import StackContainer from "./stackNavigation";
 import Profile from "../profile";
 import Booking from "../Booking";
 import Home from "../home";
+import NursingAppointments from "../nursing/Appointments";
 
 export default function BottomNavigation() {
   const _renderIcon = (routeName, selectedTab) => {
@@ -21,6 +21,9 @@ export default function BottomNavigation() {
         break;
       case "Profile":
         icon = "person";
+        break;
+      case "Nursing":
+        icon = "medical";
         break;
     }
 
@@ -80,6 +83,12 @@ export default function BottomNavigation() {
         name="Booking"
         position="LEFT"
         component={Booking}
+        options={{ headerShown: false }}
+      />
+      <CurvedBottomBar.Screen
+        name="Nursing"
+        position="RIGHT"
+        component={NursingAppointments}
         options={{ headerShown: false }}
       />
     </CurvedBottomBar.Navigator>

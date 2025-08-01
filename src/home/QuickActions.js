@@ -19,6 +19,8 @@ export default QuickActions = () => {
             onPress={() => {
               if (action.action == "Call")
                 Linking.openURL(`tel:${doctorProfile.phone}`);
+              else if (action.action === "Nursing")
+                navigate("NursingAppointments");
               else navigate(action.action);
             }}
           >
@@ -45,10 +47,10 @@ const quickActions = [
     action: "Call",
   },
   {
-    title: "الاسعافات الأولية",
+    title: "التمريض",
     icon: "medical-services",
     color: "#8ae6f0ff",
-    action: "",
+    action: "Nursing",
   },
   {
     title: "المقالات الطبية",
@@ -57,4 +59,3 @@ const quickActions = [
     action: "",
   },
 ];
-//  () => Linking.openURL(`tel:01012345678`)

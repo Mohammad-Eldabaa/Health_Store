@@ -20,7 +20,6 @@ export default function StackContainer() {
   const { current_user } = useAuthStore();
   return (
     <Navigator initialRouteName={current_user ? "BottomNavigation" : "Login"}>
-    <Navigator>
       <Screen
         name="Login"
         component={LoginScreen}

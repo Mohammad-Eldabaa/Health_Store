@@ -297,4 +297,9 @@ export const styles = StyleSheet.create({
   footer: {
     height: 20,
   },
+  personalIcon: {
+    position: "absolute",
+    top: 24,
+    left: 24,
+  },
 });

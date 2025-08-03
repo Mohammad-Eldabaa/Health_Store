@@ -56,5 +56,11 @@ const quickActions = [
     color: "#F44336",
     action: "MedicalArticlesPage",
   },
+  {
+    title: "قسم التمريض",
+    icon: "medical-services",
+    color: "#8D6E63",
+    action: "NursingHome",
+  },
 ];
 //  () => Linking.openURL(`tel:01012345678`)

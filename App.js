@@ -1,5 +1,4 @@
 import { NavigationContainer } from "@react-navigation/native";
-import BottomNavigation from "./src/routing/bottomNavigation";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StackContainer from "./src/routing/stackNavigation";
 

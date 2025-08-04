@@ -8,6 +8,7 @@ const useAuthStore = create(
   persist(
     (set, get) => ({
       current_user: null,
+      user_email: null,
       setCurrentUserAsNull: () => set({ current_user: null }),
 
       login: async ({ email, password }, navigate, reset) => {
@@ -24,6 +25,7 @@ const useAuthStore = create(
           );
         } else {
           set({ current_user: data?.user?.user_metadata });
+          set({ user_email: email });
           Alert.alert(
             "تم تسجيل الدخول بنجاح",
             "مرحبًا بك",
@@ -66,6 +68,8 @@ const useAuthStore = create(
           Alert.alert("خطأ في التسجيل", error.message);
         } else {
           set({ current_user: data?.user?.user_metadata });
+          set({ user_email: email });
+
           Alert.alert(
             "تم التسجيل بنجاح",
             "يرجى التحقق من بريدك الإلكتروني لتفعيل الحساب",
@@ -83,10 +87,9 @@ const useAuthStore = create(
         }
       },
 
-      logout: async (navigate) => {
+      logout: async (reset) => {
         await supabase.auth.signOut();
         set({ current_user: null });
-        navigate("Login");
         Alert.alert("تم تسجيل الخروج بنجاح", "نأمل أن نراك قريبًا");
       },
 
@@ -123,10 +126,27 @@ const useAuthStore = create(
         }
       },
 
+      // updateUserMetadata: async (newMetadata) => {
+      //   const { data, error } = await supabase.auth.updateUser({
+      //     data: newMetadata,
+      //   });
+
+      //   if (error) {
+      //     console.error("Error updating metadata:", error.message);
+      //     Alert.alert("خطأ", "فشل تحديث البيانات الشخصية");
+      //   } else {
+      //     const updatedUser = data?.user?.user_metadata;
+      //     set({ current_user: updatedUser });
+
+      //     Alert.alert("تم التحديث", "تم تحديث البيانات الشخصية بنجاح");
+      //   }
+      // },
+
       CUname: () => get().current_user?.full_name || "",
       CUaddress: () => get().current_user?.address || "",
       CUphone: () => get().current_user?.phone || "",
       CUrole: () => get().current_user?.role || "",
+      CUemail: () => get().current_user?.email || "",
     }),
     {
       name: "auth-storage",

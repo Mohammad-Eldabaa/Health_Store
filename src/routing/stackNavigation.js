@@ -1,7 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../home/index";
-import Profile from "../profile";
 import BottomNavigation from "./bottomNavigation";
 import LoginScreen from "../Auth/screens/LoginScreen";
 import RegisterScreen from "../Auth/screens/RegisterScreen";
@@ -11,6 +9,7 @@ import FirstAid from "../FirstAid/screens/FirstAid";
 import FirstAidDetails from "../FirstAid/screens/FirstAidDetails";
 import MedicalArticlesPage from "../MedicalArticles/screens/MedicalArticlesPage";
 import ArticleDetailsScreen from "../MedicalArticles/screens/ArticleDetailsScreen";
+import PersonalProfilePage from "../personalPage/PersonalProfilePage";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -46,9 +45,7 @@ export default function StackContainer() {
         name="FirstAid"
         component={FirstAid}
         options={{
-          // headerTitle: "الاسعافات الأولية",
           headerShown: false,
-          // headerStyle: { backgroundColor: "#fff", height: 6 },
         }}
       />
 
@@ -67,6 +64,12 @@ export default function StackContainer() {
       <Screen
         name="ArticleDetails"
         component={ArticleDetailsScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Screen
+        name="PersonalProfile"
+        component={PersonalProfilePage}
         options={{ headerShown: false }}
       />
     </Navigator>

@@ -13,8 +13,11 @@ import DatePickerField from "./DatePickerField.js";
 import { initialValues, validationSchema, handleSubmit } from "./schema.js";
 import InputField from "./InputField.js";
 import BookingFormHeader from "./BookingFormHeader.js";
+import useAuthStore from "../store/login.js";
 
 const Booking = () => {
+  const { CUname, CUphone, CUaddress } = useAuthStore();
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -97,7 +100,22 @@ const Booking = () => {
                   style={styles.submitButton}
                   onPress={handleSubmit}
                 >
-                  <Text style={styles.submitButtonText}>احجز الموعد</Text>
+                  <Text style={styles.submitButtonText}> احجز الأن</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[
+                    styles.submitButton,
+                    { backgroundColor: "#57e56fff", marginTop: 0 },
+                  ]}
+                  onPress={() => {
+                    setFieldValue("address", CUaddress());
+                    setFieldValue("fullName", CUname());
+                    setFieldValue("age", "24");
+                    setFieldValue("phoneNumber", CUphone());
+                  }}
+                >
+                  <Text style={styles.submitButtonText}> ملئ تلقائى</Text>
                 </TouchableOpacity>
               </View>
             )}

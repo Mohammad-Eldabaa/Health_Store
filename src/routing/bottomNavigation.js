@@ -1,8 +1,7 @@
-import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
-// import StackContainer from "./stackNavigation";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Profile from "../profile";
 import Booking from "../Booking";
 import Home from "../home";
@@ -17,14 +16,14 @@ export default function BottomNavigation() {
         icon = "home";
         break;
       case "Booking":
-        icon = "calendar";
+        icon = "calendar-plus";
         break;
       case "Profile":
-        icon = "person";
+        icon = "user-doctor";
         break;
     }
 
-    return <Ionicons name={icon} size={25} color={color} />;
+    return <FontAwesome6 name={icon} size={25} color={color} />;
   };
 
   const renderTabBar = ({ routeName, selectedTab, navigate }) => {

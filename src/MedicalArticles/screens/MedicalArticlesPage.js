@@ -56,7 +56,6 @@ const MedicalArticlesPage = ({ navigation }) => {
   const featured = filteredArticles.find((a) => a.featured);
 
   return (
-    // <SafeAreaView style={styles.safeArea}>
     <View style={styles.wrapper}>
       <Header navigation={navigation} />
 
@@ -97,7 +96,6 @@ const MedicalArticlesPage = ({ navigation }) => {
         )}
       </ScrollView>
     </View>
-    // </SafeAreaView>
   );
 };
 

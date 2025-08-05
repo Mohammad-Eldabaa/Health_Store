@@ -126,22 +126,6 @@ const useAuthStore = create(
         }
       },
 
-      // updateUserMetadata: async (newMetadata) => {
-      //   const { data, error } = await supabase.auth.updateUser({
-      //     data: newMetadata,
-      //   });
-
-      //   if (error) {
-      //     console.error("Error updating metadata:", error.message);
-      //     Alert.alert("خطأ", "فشل تحديث البيانات الشخصية");
-      //   } else {
-      //     const updatedUser = data?.user?.user_metadata;
-      //     set({ current_user: updatedUser });
-
-      //     Alert.alert("تم التحديث", "تم تحديث البيانات الشخصية بنجاح");
-      //   }
-      // },
-
       CUname: () => get().current_user?.full_name || "",
       CUaddress: () => get().current_user?.address || "",
       CUphone: () => get().current_user?.phone || "",

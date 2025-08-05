@@ -38,7 +38,6 @@ const PersonalProfilePage = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#0097A7" />
 
-      {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <View style={styles.avatar}>
@@ -51,12 +50,10 @@ const PersonalProfilePage = ({ navigation }) => {
             </Text>
           </View>
           <Text style={styles.headerTitle}>الملف الشخصي</Text>
-          {/* <Text style={styles.headerSubtitle}>إدارة معلوماتك الشخصية</Text> */}
         </View>
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Profile Information */}
         <View style={styles.section}>
           <InfoCard label="الاسم الكامل" value={userInfo.fullName} />
 
@@ -67,7 +64,6 @@ const PersonalProfilePage = ({ navigation }) => {
           <InfoCard label="العنوان" value={userInfo.address} multiline={true} />
         </View>
 
-        {/* Additional Options */}
         <View style={styles.optionsSection}>
           <TouchableOpacity
             onPress={() => {
@@ -184,7 +180,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   optionItem: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#f8cfcfff",
     borderRadius: 15,
     padding: 20,
     marginBottom: 10,
@@ -207,7 +203,7 @@ const styles = StyleSheet.create({
   },
   optionArrow: {
     fontSize: 24,
-    color: "#BDBDBD",
+    color: "#000",
     fontWeight: "300",
     marginLeft: 10,
   },

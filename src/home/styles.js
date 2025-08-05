@@ -59,6 +59,7 @@ export const styles = StyleSheet.create({
     color: "#B2EBF2",
   },
   quickActionsContainer: {
+    direction: "rtl",
     padding: 20,
   },
   quickActionsGrid: {
@@ -122,13 +123,14 @@ export const styles = StyleSheet.create({
   section: {
     paddingHorizontal: 20,
     marginBottom: 25,
+    direction: "rtl",
   },
   sectionTitle: {
     fontSize: 22,
     fontWeight: "bold",
     color: "#0097A7",
     marginBottom: 15,
-    textAlign: "right",
+    textAlign: "Left",
   },
   servicesGrid: {
     flexDirection: "row",

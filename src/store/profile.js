@@ -10,7 +10,7 @@ export const useProfileStore = create(
       setDoctorProfile: (profile) => set({ doctorProfile: profile }),
       getDoctorProfile: async () => {
         const { data, error } = await supabase
-          .from("DoctorProfile")
+          .from("doctors")
           .select("*")
           .single();
 

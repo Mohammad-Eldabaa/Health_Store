@@ -19,10 +19,6 @@ export const Schema = Yup.object({
   bookingDate: Yup.string().required("تاريخ الحجز مطلوب"),
   visitType: Yup.string().required("نوع الزيارة مطلوب"),
   notes: Yup.string().max(700, "الملاحظات لا يجب أن تتجاوز 700 حرف"),
-  amount: Yup.number()
-    .nullable()
-    .min(1, "المبلغ يجب أن يكون أكبر من 0")
-    .transform((value, originalValue) => (originalValue === "" ? null : value)),
 });
 
 export const formData = {
@@ -33,7 +29,6 @@ export const formData = {
   bookingDate: "",
   visitType: "",
   notes: "",
-  amount: "",
 };
 
 export const addPatient = async (values, resetForm) => {

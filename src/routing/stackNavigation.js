@@ -12,7 +12,6 @@ import ArticleDetailsScreen from "../MedicalArticles/screens/ArticleDetailsScree
 import PersonalProfilePage from "../personalPage/PersonalProfilePage";
 import NursingPatientsList from "../nurse/NursingPatientsList";
 import NursingAppointments from "../nurse/NursingAppointments";
-// import NursingAppointments from "../nurse/NursingAppointments";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 

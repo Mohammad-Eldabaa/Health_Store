@@ -10,9 +10,9 @@ import FirstAidDetails from "../FirstAid/screens/FirstAidDetails";
 import MedicalArticlesPage from "../MedicalArticles/screens/MedicalArticlesPage";
 import ArticleDetailsScreen from "../MedicalArticles/screens/ArticleDetailsScreen";
 import PersonalProfilePage from "../personalPage/PersonalProfilePage";
-import NursingHome from "../Nursing/NursingHome";
-import NursingAppointments from "../Nursing/NursingAppointments";
-import NursingPatientsList from "../Nursing/NursingPatientsList";
+import NursingPatientsList from "../nurse/NursingPatientsList";
+import NursingAppointments from "../nurse/NursingAppointments";
+// import NursingAppointments from "../nurse/NursingAppointments";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -75,20 +75,23 @@ export default function StackContainer() {
         component={PersonalProfilePage}
         options={{ headerShown: false }}
       />
+
+      {/* //----------------MOhammad Hamdy------------------------------------------------------------------------- */}
+
       <Screen
-        name="NursingHome"
-        component={NursingHome}
-        options={{ headerShown: false }}
-      />
-      <Screen
-        name="NursingAppointments"
-        component={NursingAppointments}
-        options={{ headerShown: false }}
-      />
-      <Screen
-        name="NursingPatientsList"
+        name="PatientList"
         component={NursingPatientsList}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Screen
+        name="Appointments"
+        component={NursingAppointments}
+        options={{
+          headerShown: false,
+        }}
       />
     </Navigator>
   );

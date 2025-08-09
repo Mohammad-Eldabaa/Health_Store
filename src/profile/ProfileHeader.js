@@ -7,16 +7,8 @@ import { setupRealtimeProfile } from "../store/realtime";
 import { supabase } from "../store/supabase";
 
 export const ProfileHeader = () => {
-  const { doctorProfile, getDoctorImage, setDoctorProfile } = useProfileStore();
+  const { doctorProfile, getDoctorImage } = useProfileStore();
   const [doctorImage, setDoctorImage] = useState(null);
-
-  useEffect(() => {
-    console.log("inside use effect");
-    const channel = setupRealtimeProfile(setDoctorProfile);
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
 
   const fetchDoctorImage = async () => {
     if (doctorProfile.image) {

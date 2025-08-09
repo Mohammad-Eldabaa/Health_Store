@@ -173,14 +173,11 @@ export async function getQueuePosition(patientId, doctorId = null) {
   if (!patientId) throw new Error("Patient ID is required");
 
   try {
-    const todayDate = new Date().toISOString().split("T")[0];
-
     let query = supabase
       .from("appointments")
       .select("*, doctor:doctor_id(name)")
       .eq("patient_id", patientId)
       .eq("status", "في الإنتظار")
-      .gte("date", todayDate)
       .order("date", { ascending: true })
       .order("time", { ascending: true });
 
@@ -190,21 +187,22 @@ export async function getQueuePosition(patientId, doctorId = null) {
 
     const { data: patientAppointments, error: patientError } =
       await query.limit(1);
-
     if (patientError) throw patientError;
     if (!patientAppointments || patientAppointments.length === 0) {
       return { nextAppointment: null, queuePosition: 0, totalQueue: 0 };
     }
 
     const nextAppointment = patientAppointments[0];
+    const appointmentDate = nextAppointment.date;
+    const appointmentTime = nextAppointment.time;
 
     const { data: allAppointments, error: allError } = await supabase
       .from("appointments")
       .select("*")
-      .eq("date", nextAppointment.date)
+      .eq("date", appointmentDate)
       .eq("status", "في الإنتظار")
-      .lt("time", nextAppointment.time)
       .eq("doctor_id", nextAppointment.doctor_id)
+      .lt("time", appointmentTime)
       .order("time", { ascending: true });
 
     if (allError) throw allError;
@@ -212,15 +210,15 @@ export async function getQueuePosition(patientId, doctorId = null) {
     const { data: totalAppointments, error: totalError } = await supabase
       .from("appointments")
       .select("*", { count: "exact" })
-      .eq("date", nextAppointment.date)
+      .eq("date", appointmentDate)
       .eq("status", "في الإنتظار")
       .eq("doctor_id", nextAppointment.doctor_id);
 
     if (totalError) throw totalError;
 
     return {
-      nextAppointment,
-      queuePosition: allAppointments?.length || 0,
+      nextAppointment: nextAppointment,
+      queuePosition: allAppointments?.length + 1 || 1,
       totalQueue: totalAppointments?.length || 0,
     };
   } catch (error) {

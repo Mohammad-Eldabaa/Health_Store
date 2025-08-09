@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { getQueuePosition } from "../store/patientService";
 
 function QueueStatus({ patientId, doctorId = null, refreshInterval = 30000 }) {
+  const [initialQueuePosition, setInitialQueuePosition] = useState(null);
   const [queueInfo, setQueueInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState(null);
@@ -18,12 +19,16 @@ function QueueStatus({ patientId, doctorId = null, refreshInterval = 30000 }) {
 
   const fetchQueueInfo = async () => {
     if (!patientId) return;
-
     try {
       setLoading(true);
       setError(null);
       const info = await getQueuePosition(patientId, doctorId);
       setQueueInfo(info);
+
+      if (initialQueuePosition === null && info.queuePosition > 0) {
+        setInitialQueuePosition(info.queuePosition);
+      }
+
       setLastUpdate(new Date());
     } catch (err) {
       console.error("Error fetching queue info:", err);
@@ -94,7 +99,7 @@ function QueueStatus({ patientId, doctorId = null, refreshInterval = 30000 }) {
   }
 
   const { nextAppointment, queuePosition, totalQueue } = queueInfo;
-  const estimatedWaitTime = Math.max(0, queuePosition * 15);
+  const estimatedWaitTime = Math.max(0, queuePosition * 10);
   const progressPercentage = ((totalQueue - queuePosition) / totalQueue) * 100;
 
   return (
@@ -166,15 +171,23 @@ function QueueStatus({ patientId, doctorId = null, refreshInterval = 30000 }) {
             <View style={styles.progressHeader}>
               <Text style={styles.progressLabel}>تقدم الدور</Text>
               <Text style={styles.progressText}>
-                {totalQueue - queuePosition} من {totalQueue}
+                {initialQueuePosition
+                  ? initialQueuePosition - queuePosition
+                  : 0}
+                من {initialQueuePosition}
               </Text>
             </View>
             <View style={styles.progressBarContainer}>
               <View
-                style={[
-                  styles.progressBar,
-                  { width: `${progressPercentage}%` },
-                ]}
+                style={{
+                  width: `${
+                    initialQueuePosition
+                      ? ((initialQueuePosition - queuePosition) /
+                          initialQueuePosition) *
+                        100
+                      : 0
+                  }%`,
+                }}
               />
             </View>
           </View>

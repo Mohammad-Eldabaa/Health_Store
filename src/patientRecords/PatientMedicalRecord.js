@@ -299,16 +299,6 @@ function PatientMedicalRecord({ patient = {}, records = {} }) {
           <View style={styles.patientDetails}>
             <View style={styles.detailBadge}>
               <Text style={styles.detailText}>
-                العمر: {patient.age ?? "غير معروف"} سنة
-              </Text>
-            </View>
-            <View style={styles.detailBadge}>
-              <Text style={styles.detailText}>
-                الجنس: {patient.gender || "غير معروف"}
-              </Text>
-            </View>
-            <View style={styles.detailBadge}>
-              <Text style={styles.detailText}>
                 الهاتف: {patient.phoneNumber || patient.phone || "غير مسجل"}
               </Text>
             </View>
@@ -385,6 +375,7 @@ const styles = StyleSheet.create({
   },
   patientInfo: {
     flex: 1,
+    marginRight: 10,
   },
   patientName: {
     fontSize: 20,

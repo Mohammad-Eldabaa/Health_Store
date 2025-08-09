@@ -95,7 +95,7 @@ const useAuthStore = create(
 
       handleForgotPassword: async (email, navigation) => {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: "myapp://Register",
+          redirectTo: "https://health-project-mu.vercel.app/resetpassword",
         });
 
         if (error) {

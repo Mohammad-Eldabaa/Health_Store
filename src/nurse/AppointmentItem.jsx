@@ -198,215 +198,216 @@ const AppointmentItem = ({ appt, index }) => {
           )}
         </View>
       </View>
+
       <Modal visible={isExpanded} animationType="slide" transparent={true}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
+            {/* Fixed Header */}
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>تفاصيل الموعد</Text>
               <TouchableOpacity onPress={() => setIsExpanded(false)}>
                 <Icon name="close" size={24} color="#6b7280" />
               </TouchableOpacity>
             </View>
-            {isEditing ? (
-              <View style={styles.form}>
-                <View style={styles.formGroup}>
-                  <Text style={styles.label}>التاريخ</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={editFormData.date}
-                    onChangeText={(value) => handleEditChange("date", value)}
-                    placeholder="YYYY-MM-DD"
-                  />
+
+            {/* Scrollable Content */}
+            <ScrollView
+              style={{ flex: 1 }}
+              contentContainerStyle={{ paddingBottom: 20 }}
+              showsVerticalScrollIndicator={false}
+            >
+              {isEditing ? (
+                <View style={styles.form}>
+                  <View style={styles.formGroup}>
+                    <Text style={styles.label}>التاريخ</Text>
+                    <TextInput
+                      style={styles.input}
+                      value={editFormData.date}
+                      onChangeText={(value) => handleEditChange("date", value)}
+                      placeholder="YYYY-MM-DD"
+                    />
+                  </View>
+
+                  <View style={styles.formGroup}>
+                    <Text style={styles.label}>الوقت</Text>
+                    <TextInput
+                      style={styles.input}
+                      value={editFormData.time}
+                      onChangeText={(value) => handleEditChange("time", value)}
+                      placeholder="HH:MM"
+                    />
+                  </View>
+
+                  <View style={styles.formGroup}>
+                    <Text style={styles.label}>الطبيب</Text>
+                    <Picker
+                      selectedValue={editFormData.doctor_id}
+                      onValueChange={(value) =>
+                        handleEditChange("doctor_id", value)
+                      }
+                      style={styles.input}
+                    >
+                      <Picker.Item label="اختر الطبيب" value="" />
+                      {doctors.map((doctor) => (
+                        <Picker.Item
+                          key={doctor.id}
+                          label={`${doctor.name} (رسوم: ${doctor.fees} جنيه)`}
+                          value={doctor.id}
+                        />
+                      ))}
+                    </Picker>
+                  </View>
+
+                  <View style={styles.formGroup}>
+                    <Text style={styles.label}>الحالة</Text>
+                    <Picker
+                      selectedValue={editFormData.status}
+                      onValueChange={(value) =>
+                        handleEditChange("status", value)
+                      }
+                      style={styles.input}
+                    >
+                      <Picker.Item label="في الإنتظار" value="في الإنتظار" />
+                      <Picker.Item label="ملغى" value="ملغى" />
+                      <Picker.Item label="تم" value="تم" />
+                    </Picker>
+                  </View>
+
+                  <View style={styles.formGroup}>
+                    <Text style={styles.label}>الملاحظات</Text>
+                    <TextInput
+                      style={[styles.input, { height: 100 }]}
+                      value={editFormData.reason}
+                      onChangeText={(value) =>
+                        handleEditChange("reason", value)
+                      }
+                      multiline
+                      placeholder="أضف ملاحظات..."
+                    />
+                  </View>
+
+                  <View style={styles.formGroup}>
+                    <Text style={styles.label}>المبلغ</Text>
+                    <TextInput
+                      style={[styles.input, { backgroundColor: "#f3f4f6" }]}
+                      value={
+                        editFormData.amount
+                          ? editFormData.amount.toString()
+                          : ""
+                      }
+                      editable={false}
+                    />
+                  </View>
+
+                  <View style={styles.modalActions}>
+                    <TouchableOpacity
+                      style={styles.cancelButton}
+                      onPress={() => setIsEditing(false)}
+                    >
+                      <Text style={styles.buttonText}>إلغاء</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.submitButton}
+                      onPress={handleEditSubmit}
+                    >
+                      <Text style={styles.buttonText}>حفظ التغييرات</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <View style={styles.formGroup}>
-                  <Text style={styles.label}>الوقت</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={editFormData.time}
-                    onChangeText={(value) => handleEditChange("time", value)}
-                    placeholder="HH:MM"
-                  />
-                </View>
-                <View style={styles.formGroup}>
-                  <Text style={styles.label}>الطبيب</Text>
-                  <Picker
-                    selectedValue={editFormData.doctor_id}
-                    onValueChange={(value) =>
-                      handleEditChange("doctor_id", value)
-                    }
-                    style={styles.input}
-                  >
-                    <Picker.Item label="اختر الطبيب" value="" />
-                    {doctors.map((doctor) => (
-                      <Picker.Item
-                        key={doctor.id}
-                        label={`${doctor.name} (رسوم: ${doctor.fees} جنيه)`}
-                        value={doctor.id}
-                      />
-                    ))}
-                  </Picker>
-                </View>
-                <View style={styles.formGroup}>
-                  <Text style={styles.label}>الحالة</Text>
-                  <Picker
-                    selectedValue={editFormData.status}
-                    onValueChange={(value) => handleEditChange("status", value)}
-                    style={styles.input}
-                  >
-                    <Picker.Item label="في الإنتظار" value="في الإنتظار" />
-                    <Picker.Item label="ملغى" value="ملغى" />
-                    <Picker.Item label="تم" value="تم" />
-                  </Picker>
-                </View>
-                <View style={styles.formGroup}>
-                  <Text style={styles.label}>الملاحظات</Text>
-                  <TextInput
-                    style={[styles.input, { height: 100 }]}
-                    value={editFormData.reason}
-                    onChangeText={(value) => handleEditChange("reason", value)}
-                    multiline
-                    placeholder="أضف ملاحظات..."
-                  />
-                </View>
-                <View style={styles.formGroup}>
-                  <Text style={styles.label}>المبلغ</Text>
-                  <TextInput
-                    style={[styles.input, { backgroundColor: "#f3f4f6" }]}
-                    value={
-                      editFormData.amount ? editFormData.amount.toString() : ""
-                    }
-                    editable={false}
-                  />
-                </View>
-                <View style={styles.modalActions}>
-                  <TouchableOpacity
-                    style={styles.cancelButton}
-                    onPress={() => setIsEditing(false)}
-                  >
-                    <Text style={styles.buttonText}>إلغاء</Text>
-                  </TouchableOpacity>
+              ) : (
+                <View style={styles.detailContainer}>
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>رقم الموعد:</Text>
+                    <Text style={styles.detailValue}>
+                      {appt?.id || "غير متوفر"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>اسم المريض:</Text>
+                    <Text style={styles.detailValue}>
+                      {appt?.patientName || "غير متوفر"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>الطبيب:</Text>
+                    <Text style={styles.detailValue}>
+                      {appt?.doctorName || "غير محدد"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>الحالة:</Text>
+                    <Text
+                      style={[
+                        styles.detailValue,
+                        styles.badge,
+                        appt?.status === "في الإنتظار"
+                          ? { backgroundColor: "#fef9c3", color: "#854d0e" }
+                          : appt?.status === "ملغى"
+                          ? { backgroundColor: "#fee2e2", color: "#991b1b" }
+                          : { backgroundColor: "#dcfce7", color: "#15803d" },
+                      ]}
+                    >
+                      {appt?.status || "غير محدد"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>التاريخ:</Text>
+                    <Text style={styles.detailValue}>
+                      {appt?.date
+                        ? new Date(appt?.date).toLocaleDateString("ar-EG")
+                        : "غير متوفر"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>الوقت:</Text>
+                    <Text style={styles.detailValue}>
+                      {appt?.time || "غير متوفر"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>السبب:</Text>
+                    <Text style={styles.detailValue}>
+                      {appt?.reason || "لا توجد ملاحظات"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>حالة الدفع:</Text>
+                    <Text
+                      style={[
+                        styles.detailValue,
+                        styles.badge,
+                        appt?.payment
+                          ? { backgroundColor: "#dcfce7", color: "#15803d" }
+                          : { backgroundColor: "#fee2e2", color: "#991b1b" },
+                      ]}
+                    >
+                      {appt?.payment ? "مدفوع" : "غير مدفوع"}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>المبلغ:</Text>
+                    <Text style={styles.detailValue}>
+                      {appt?.amount ? `${appt?.amount} جنيه` : "غير محدد"}
+                    </Text>
+                  </View>
+
                   <TouchableOpacity
                     style={styles.submitButton}
-                    onPress={handleEditSubmit}
+                    onPress={() => setIsEditing(true)}
                   >
-                    <Text style={styles.buttonText}>حفظ التغييرات</Text>
+                    <Text style={styles.buttonText}>تعديل الموعد</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
-            ) : (
-              <View style={styles.detailContainer}>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>رقم الموعد:</Text>
-                  <Text style={styles.detailValue}>
-                    {appt?.id || "غير متوفر"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>اسم المريض:</Text>
-                  <Text style={styles.detailValue}>
-                    {appt?.patientName || "غير متوفر"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>الطبيب:</Text>
-                  <Text style={styles.detailValue}>
-                    {appt?.doctorName || "غير محدد"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>الحالة:</Text>
-                  <Text
-                    style={[
-                      styles.detailValue,
-                      styles.badge,
-                      appt?.status === "في الإنتظار"
-                        ? { backgroundColor: "#fef9c3", color: "#854d0e" }
-                        : appt?.status === "ملغى"
-                        ? { backgroundColor: "#fee2e2", color: "#991b1b" }
-                        : { backgroundColor: "#dcfce7", color: "#15803d" },
-                    ]}
-                  >
-                    {appt?.status || "غير محدد"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>التاريخ:</Text>
-                  <Text style={styles.detailValue}>
-                    {appt?.date
-                      ? new Date(appt?.date).toLocaleDateString("ar-EG")
-                      : "غير متوفر"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>الوقت:</Text>
-                  <Text style={styles.detailValue}>
-                    {appt?.time || "غير متوفر"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>السبب:</Text>
-                  <Text style={styles.detailValue}>
-                    {appt?.reason || "لا توجد ملاحظات"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>حالة الدفع:</Text>
-                  <Text
-                    style={[
-                      styles.detailValue,
-                      styles.badge,
-                      appt?.payment
-                        ? { backgroundColor: "#dcfce7", color: "#15803d" }
-                        : { backgroundColor: "#fee2e2", color: "#991b1b" },
-                    ]}
-                  >
-                    {appt?.payment ? "مدفوع" : "غير مدفوع"}
-                  </Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>المبلغ:</Text>
-                  <Text style={styles.detailValue}>
-                    {appt?.amount ? `${appt?.amount} جنيه` : "غير محدد"}
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  style={styles.submitButton}
-                  onPress={() => setIsEditing(true)}
-                >
-                  <Text style={styles.buttonText}>تعديل الموعد</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
-        </View>
-      </Modal>
-      <Modal
-        visible={showPaymentModal}
-        animationType="slide"
-        transparent={true}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>اختر طريقة الدفع</Text>
-              <TouchableOpacity onPress={() => setShowPaymentModal(false)}>
-                <Icon name="close" size={24} color="#6b7280" />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.modalActions}>
-              <TouchableOpacity
-                style={styles.submitButton}
-                onPress={() => handlePayment("stripe")}
-              >
-                <Text style={styles.buttonText}>دفع عبر Stripe</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.submitButton}
-                onPress={() => handlePayment("paymob")}
-              >
-                <Text style={styles.buttonText}>دفع عبر Paymob</Text>
-              </TouchableOpacity>
-            </View>
+              )}
+            </ScrollView>
           </View>
         </View>
       </Modal>

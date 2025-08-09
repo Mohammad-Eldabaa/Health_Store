@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Alert,
   Modal,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
@@ -232,23 +233,22 @@ const NursingPatientsList = ({ navigation }) => {
       <View style={styles.cardActions}>
         <TouchableOpacity
           style={styles.actionButton}
-          onPress={() =>
-            Alert.alert("تفاصيل", `عرض تفاصيل المريض ${item.fullName}`)
-          }
-        >
-          <Icon name="visibility" size={24} color="#2563eb" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.actionButton}
           onPress={() => openEditModal(item)}
         >
-          <Icon name="edit" size={24} color="#f59e0b" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => deletePatient(item.id)}
-        >
-          <Icon name="delete" size={24} color="#dc2626" />
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              backgroundColor: "#f59e0b",
+              padding: 8,
+              borderRadius: 12,
+            }}
+          >
+            <Text style={{ fontSize: 18, marginHorizontal: 8, color: "#fff" }}>
+              تعديل
+            </Text>
+            <Icon name="edit" size={24} color="#fff" />
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -286,6 +286,7 @@ const NursingPatientsList = ({ navigation }) => {
           contentContainerStyle={styles.listContainer}
         />
       )}
+
       <Modal visible={showEditModal} animationType="slide" transparent={true}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -300,7 +301,12 @@ const NursingPatientsList = ({ navigation }) => {
                 <Icon name="close" size={24} color="#6b7280" />
               </TouchableOpacity>
             </View>
-            <View style={styles.form}>
+
+            <ScrollView
+              contentContainerStyle={{ paddingBottom: 20 }}
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+            >
               <View style={styles.formGroup}>
                 <Text style={styles.label}>اسم المريض</Text>
                 <TextInput
@@ -316,6 +322,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.errorText}>{formErrors.fullName}</Text>
                 )}
               </View>
+
               <View style={styles.formGroup}>
                 <Text style={styles.label}>العمر</Text>
                 <TextInput
@@ -329,6 +336,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.errorText}>{formErrors.age}</Text>
                 )}
               </View>
+
               <View style={styles.formGroup}>
                 <Text style={styles.label}>رقم الهاتف</Text>
                 <TextInput
@@ -345,6 +353,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.errorText}>{formErrors.phoneNumber}</Text>
                 )}
               </View>
+
               <View style={styles.formGroup}>
                 <Text style={styles.label}>العنوان</Text>
                 <TextInput
@@ -360,6 +369,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.errorText}>{formErrors.address}</Text>
                 )}
               </View>
+
               <View style={styles.formGroup}>
                 <Text style={styles.label}>تاريخ الحجز</Text>
                 <TextInput
@@ -375,6 +385,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.errorText}>{formErrors.bookingDate}</Text>
                 )}
               </View>
+
               <View style={styles.formGroup}>
                 <Text style={styles.label}>نوع الزيارة</Text>
                 <Picker
@@ -394,6 +405,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.errorText}>{formErrors.visitType}</Text>
                 )}
               </View>
+
               <View style={styles.formGroup}>
                 <Text style={styles.label}>الملاحظات</Text>
                 <TextInput
@@ -411,6 +423,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.errorText}>{formErrors.notes}</Text>
                 )}
               </View>
+
               <View style={styles.modalActions}>
                 <TouchableOpacity
                   style={styles.cancelButton}
@@ -428,7 +441,7 @@ const NursingPatientsList = ({ navigation }) => {
                   <Text style={styles.buttonText}>حفظ التعديلات</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </ScrollView>
           </View>
         </View>
       </Modal>

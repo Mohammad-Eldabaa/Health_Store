@@ -12,6 +12,7 @@ import ArticleDetailsScreen from "../MedicalArticles/screens/ArticleDetailsScree
 import PersonalProfilePage from "../personalPage/PersonalProfilePage";
 import NursingPatientsList from "../nurse/NursingPatientsList";
 import NursingAppointments from "../nurse/NursingAppointments";
+import PatientRecordContainer from "../patientRecords/PatientRecord";
 // import NursingAppointments from "../nurse/NursingAppointments";
 
 const { Navigator, Screen } = createNativeStackNavigator();
@@ -89,6 +90,16 @@ export default function StackContainer() {
       <Screen
         name="Appointments"
         component={NursingAppointments}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      {/* //----------------Patient Records------------------------------------------------------------------------- */}
+
+      <Screen
+        name="records"
+        component={PatientRecordContainer}
         options={{
           headerShown: false,
         }}

@@ -16,7 +16,7 @@ import BookingFormHeader from "./BookingFormHeader.js";
 import useAuthStore from "../store/login.js";
 
 const Booking = () => {
-  const { CUname, CUphone, CUaddress } = useAuthStore();
+  const { CUname, CUphone, CUaddress, CUrole } = useAuthStore();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -103,20 +103,22 @@ const Booking = () => {
                   <Text style={styles.submitButtonText}> احجز الأن</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={[
-                    styles.submitButton,
-                    { backgroundColor: "#57e56fff", marginTop: 0 },
-                  ]}
-                  onPress={() => {
-                    setFieldValue("address", CUaddress());
-                    setFieldValue("fullName", CUname());
-                    setFieldValue("age", "24");
-                    setFieldValue("phoneNumber", CUphone());
-                  }}
-                >
-                  <Text style={styles.submitButtonText}> ملئ تلقائى</Text>
-                </TouchableOpacity>
+                {CUrole() && (
+                  <TouchableOpacity
+                    style={[
+                      styles.submitButton,
+                      { backgroundColor: "#57e56fff", marginTop: 0 },
+                    ]}
+                    onPress={() => {
+                      setFieldValue("address", CUaddress());
+                      setFieldValue("fullName", CUname());
+                      setFieldValue("age", "24");
+                      setFieldValue("phoneNumber", CUphone());
+                    }}
+                  >
+                    <Text style={styles.submitButtonText}> ملئ تلقائى</Text>
+                  </TouchableOpacity>
+                )}
               </View>
             )}
           </Formik>

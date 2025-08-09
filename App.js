@@ -4,7 +4,7 @@ import StackContainer from "./src/routing/stackNavigation";
 
 export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#0097A7" }}>
       <NavigationContainer>
         <StackContainer />
       </NavigationContainer>

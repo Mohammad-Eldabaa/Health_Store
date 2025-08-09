@@ -5,9 +5,9 @@ import { Picker } from "@react-native-picker/picker";
 
 const visitTypes = [
   { label: "اختر نوع الزيارة", value: "" },
-  { label: "فحص عام", value: "general-checkup" },
-  { label: "استشارة", value: "consultation" },
-  { label: "زيارة متابعة", value: "follow-up" },
+  { label: "فحص عام", value: "فحص" },
+  { label: "استشارة", value: "إستشارة" },
+  { label: "زيارة متابعة", value: "متابعة" },
 ];
 
 export default VisitTypeField = ({ field, form }) => (

@@ -52,9 +52,7 @@ const LoginScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={{
-          uri: "https://img.pikbest.com/png-images/20241019/doctor-logo-vector-icon-illustration_10974092.png!w700wp",
-        }}
+        source={require("../../../assets/doctor.png")}
         style={styles.avatar}
       />
 
@@ -114,7 +112,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#E0F7FA",
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
